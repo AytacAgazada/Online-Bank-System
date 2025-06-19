@@ -56,4 +56,5 @@ public class AuthController {
                         "\nUser Email: " + userDetails.getEmail()
         );
     }
+
 }

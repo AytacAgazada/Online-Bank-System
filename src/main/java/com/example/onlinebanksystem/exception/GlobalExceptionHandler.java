@@ -38,4 +38,5 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleGlobalException(Exception ex) {
         return new ResponseEntity<>("An unexpected error occurred. Please try again later.", HttpStatus.INTERNAL_SERVER_ERROR); // HTTP 500 Internal Server Error
     }
+
 }

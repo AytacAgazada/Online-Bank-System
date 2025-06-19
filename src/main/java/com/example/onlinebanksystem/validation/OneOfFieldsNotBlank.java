@@ -21,4 +21,5 @@ public @interface OneOfFieldsNotBlank {
     @interface List {
         OneOfFieldsNotBlank[] value();
     }
+
 }

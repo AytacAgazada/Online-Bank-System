@@ -54,4 +54,5 @@ public class AuthService {
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid FIN or password."));
         return user;
     }
+
 }

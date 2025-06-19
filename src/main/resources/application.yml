@@ -3,11 +3,11 @@ spring:
     name: online-bank-system
 
   datasource:
-    url: jdbc:h2:mem:bankdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:bankdb;
     driverClassName: org.h2.Driver
     username: sa
-    password: password
-    # For connection pooling (HikariCP is default in Spring Boot)
+    password:
+
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
@@ -15,23 +15,15 @@ spring:
       connection-timeout: 20000
 
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update # 'update' is good for development. Use 'none' or 'validate' for production.
-    show-sql: true # Log SQL queries to console
-    properties:
-      hibernate:
-        format_sql: true # Format SQL logs for readability
-        dialect: org.hibernate.dialect.H2Dialect
-
-  h2:
-    console:
-      enabled: true # Enable H2 console for web access
-      path: /h2-console # URL path for H2 console
-      settings:
-        web-allow-others: true # Allow remote connections (be careful in production)
+      ddl-auto: update
+    h2:
+      console:
+        enabled: true
 
 server:
-  port: 7777 # Or any other port you prefer
+  port: 8080 # Or any other port you prefer
 
 # --- JWT Konfiqurasiyas? ---
 jwt:

@@ -27,4 +27,5 @@ public class UserAlreadyExistsException extends RuntimeException {
     public String getFieldValue() {
         return fieldValue;
     }
+
 }

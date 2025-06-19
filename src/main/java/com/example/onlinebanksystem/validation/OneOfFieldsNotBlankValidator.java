@@ -47,5 +47,6 @@ public class OneOfFieldsNotBlankValidator implements ConstraintValidator<OneOfFi
         }
 
         return atLeastOneNotBlank;
+
     }
 }
