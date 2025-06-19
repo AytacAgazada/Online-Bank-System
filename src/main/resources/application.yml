@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: online-bank-system
+
+  datasource:
+    url: jdbc:h2:mem:bankdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    # For connection pooling (HikariCP is default in Spring Boot)
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 'update' is good for development. Use 'none' or 'validate' for production.
+    show-sql: true # Log SQL queries to console
+    properties:
+      hibernate:
+        format_sql: true # Format SQL logs for readability
+        dialect: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true # Enable H2 console for web access
+      path: /h2-console # URL path for H2 console
+      settings:
+        web-allow-others: true # Allow remote connections (be careful in production)
+
+server:
+  port: 7777 # Or any other port you prefer
+
+# --- JWT Konfiqurasiyas? ---
+jwt:
+  # Bu a�ar ?n az? 32 bayt (256 bit) uzunlu?unda v? Base64 kodlanm?? olmal?d?r.
+  # Onlayn olaraq random Base64 string generatorlardan istifad? edib bu hiss?ni d?yi?in!
+  secret: I6sv3bqLKUtPobiVOdilZ11TfYmxXn+ciDF2VD1peao=
+  expiration:
+    ms: 86400000 # 24 saat (milisaniy? il?) = 24 * 60 * 60 * 1000 milisaniy?

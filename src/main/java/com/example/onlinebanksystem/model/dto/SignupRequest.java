@@ -17,7 +17,7 @@ public class SignupRequest {
 
     @NotBlank(message = "FIN cannot be blank")
     @Size(min = 7, max = 7, message = "FIN must be 7 characters long.")
-    @Pattern(regexp = "^[0-9A-Z]{7}$", message = "FIN must be 7 characters long.")
+    @Pattern(regexp = "^[0-9A-Z]{7}$", message = "FIN must consist of 7 uppercase letters or digits.")
     private String fin;
 
     @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Invalid email format")

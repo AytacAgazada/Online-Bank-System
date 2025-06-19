@@ -1,6 +1,6 @@
 package com.example.onlinebanksystem.validation;
 
-import com.example.onlinebanksystem.model.dto.SignupRequest; // SignupRequest-i import edin
+import com.example.onlinebanksystem.model.dto.SignupRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -13,12 +13,17 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context) {
         SignupRequest user = (SignupRequest) obj;
+
+        if (user.getPassword() == null || user.getConfirmPassword() == null) {
+            return false;
+        }
+
         boolean isValid = user.getPassword().equals(user.getConfirmPassword());
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
-                    .addPropertyNode("confirmPassword") // Xətanı confirmPassword sahəsinə əlavə et
+                    .addPropertyNode("confirmPassword")
                     .addConstraintViolation();
         }
         return isValid;
