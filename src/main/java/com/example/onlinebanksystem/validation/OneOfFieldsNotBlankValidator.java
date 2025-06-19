@@ -10,12 +10,6 @@ public class OneOfFieldsNotBlankValidator implements ConstraintValidator<OneOfFi
     private String message;
 
     @Override
-    public void initialize(OneOfFieldsNotBlank constraintAnnotation) {
-        this.fieldNames = constraintAnnotation.fieldNames();
-        this.message = constraintAnnotation.message();
-    }
-
-    @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (value == null) {
             return false;
@@ -26,6 +20,7 @@ public class OneOfFieldsNotBlankValidator implements ConstraintValidator<OneOfFi
 
         for (String fieldName : fieldNames) {
             if (!beanWrapper.isReadableProperty(fieldName)) {
+                // Burada loglama əlavə et, ya da exception at
                 continue;
             }
             Object fieldValue = beanWrapper.getPropertyValue(fieldName);
@@ -42,11 +37,14 @@ public class OneOfFieldsNotBlankValidator implements ConstraintValidator<OneOfFi
 
         if (!atLeastOneNotBlank) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(message)
-                    .addConstraintViolation();
+            for (String fieldName : fieldNames) {
+                context.buildConstraintViolationWithTemplate(message)
+                        .addPropertyNode(fieldName)
+                        .addConstraintViolation();
+            }
         }
 
         return atLeastOneNotBlank;
-
     }
+
 }

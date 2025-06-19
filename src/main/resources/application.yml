@@ -3,32 +3,25 @@ spring:
     name: online-bank-system
 
   datasource:
-    url: jdbc:h2:mem:bankdb;
+    url: jdbc:h2:mem:bankdb
     driverClassName: org.h2.Driver
     username: sa
     password:
-
-    hikari:
-      maximum-pool-size: 10
-      minimum-idle: 2
-      idle-timeout: 30000
-      connection-timeout: 20000
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    h2:
-      console:
-        enabled: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 server:
-  port: 8080 # Or any other port you prefer
+  port: 8080
 
-# --- JWT Konfiqurasiyas? ---
 jwt:
-  # Bu a�ar ?n az? 32 bayt (256 bit) uzunlu?unda v? Base64 kodlanm?? olmal?d?r.
-  # Onlayn olaraq random Base64 string generatorlardan istifad? edib bu hiss?ni d?yi?in!
   secret: I6sv3bqLKUtPobiVOdilZ11TfYmxXn+ciDF2VD1peao=
   expiration:
-    ms: 86400000 # 24 saat (milisaniy? il?) = 24 * 60 * 60 * 1000 milisaniy?
+    ms: 86400000

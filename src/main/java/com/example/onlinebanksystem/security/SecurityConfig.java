@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -54,13 +54,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        HttpSecurity headers1 = http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**").permitAll()
-                                .anyRequest().authenticated()
-                );
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()  // 🔥 H2 üçün istisna
+                        .anyRequest().authenticated()
+                )
+                .headers(headers -> headers.frameOptions().disable());// 🔥 H2 iframe icazəsi
 
         http.authenticationProvider(authenticationProvider());
 
@@ -68,5 +70,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }

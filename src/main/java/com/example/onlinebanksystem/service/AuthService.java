@@ -2,6 +2,7 @@ package com.example.onlinebanksystem.service;
 
 import com.example.onlinebanksystem.exception.InvalidCredentialsException;
 import com.example.onlinebanksystem.exception.UserAlreadyExistsException;
+import com.example.onlinebanksystem.mapper.UserMapper;
 import com.example.onlinebanksystem.model.dto.LoginRequest;
 import com.example.onlinebanksystem.model.dto.SignupRequest;
 import com.example.onlinebanksystem.model.entity.User;
@@ -14,10 +15,12 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
     public User registerUser(SignupRequest signupRequest) {
@@ -52,6 +55,10 @@ public class AuthService {
     public User authenticateUser(LoginRequest loginRequest) {
         User user = userRepository.findByFin(loginRequest.getFin())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid FIN or password."));
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid FIN or password.");
+        }
+
         return user;
     }
 

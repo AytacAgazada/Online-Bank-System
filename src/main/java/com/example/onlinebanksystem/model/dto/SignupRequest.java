@@ -2,6 +2,7 @@ package com.example.onlinebanksystem.model.dto;
 
 import com.example.onlinebanksystem.validation.OneOfFieldsNotBlank;
 import com.example.onlinebanksystem.validation.PasswordMatches;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -33,6 +34,7 @@ public class SignupRequest {
     private String password;
 
     @NotBlank(message = "Confirm Password cannot be blank")
+    @JsonIgnore
     private String confirmPassword;
 
 }
