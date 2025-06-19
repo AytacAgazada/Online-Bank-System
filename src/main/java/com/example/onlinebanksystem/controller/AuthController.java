@@ -1,4 +1,3 @@
-// src/main/java/com/example/onlinebanksystem/controller/AuthController.java
 package com.example.onlinebanksystem.controller;
 
 import com.example.onlinebanksystem.model.dto.LoginRequest;
