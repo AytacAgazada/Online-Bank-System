@@ -3,9 +3,9 @@ import java.util.Base64;
 
 public class JwtSecretKeyGenerator {
     public static void main(String[] args) {
-        // 256-bit (32 byte) güclü açar yaratmaq
+        // 512-bit (64 byte) güclü açar yaratmaq
         SecureRandom secureRandom = new SecureRandom();
-        byte[] keyBytes = new byte[32]; // 32 bayt = 256 bit
+        byte[] keyBytes = new byte[64]; // 64 bayt = 512 bit
         secureRandom.nextBytes(keyBytes);
 
         // Base64 formatına kodlamaq

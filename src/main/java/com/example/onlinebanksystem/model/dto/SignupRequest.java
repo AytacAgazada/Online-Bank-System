@@ -34,7 +34,6 @@ public class SignupRequest {
     private String password;
 
     @NotBlank(message = "Confirm Password cannot be blank")
-    @JsonIgnore
     private String confirmPassword;
 
 }

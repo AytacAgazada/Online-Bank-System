@@ -19,9 +19,9 @@ spring:
       path: /h2-console
 
 server:
-  port: 8080
+  port: 8585
 
 jwt:
-  secret: I6sv3bqLKUtPobiVOdilZ11TfYmxXn+ciDF2VD1peao=
+  secret: b3cdEi8ywRPvpCmcnEmKZtgh0g1mebDO49LSbbMDGWftX8e5ESQdfcywvNiFIz01Ot3pj/F0L1FB+hioI9zULQ==
   expiration:
     ms: 86400000
